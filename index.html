@@ -12,7 +12,7 @@
 <!-- SECURITY: Prevent caching of sensitive page -->
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://corrosive-ticket-bot-production.up.railway.app https://*.tawk.to wss://*.tawk.to; script-src 'self' 'unsafe-inline' https://embed.tawk.to https://*.tawk.to; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.tawk.to; font-src 'self' https://fonts.gstatic.com https://*.tawk.to; img-src 'self' data: https://*.tawk.to; frame-src https://tawk.to https://*.tawk.to; worker-src blob:;"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://corrosive-ticket-bot-production.up.railway.app; script-src 'self' 'unsafe-inline' https://embed.tawk.to; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src https://tawk.to;"/>
 <!-- SECURITY: Robots — keep page off search engines / scrapers -->
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet"/>
 <title>CORROSIVE CHEATS — ELITE ENHANCEMENTS</title>
@@ -423,24 +423,8 @@ footer{position:relative;z-index:2;padding:60px 4rem;border-top:1px solid var(--
 }
 /* SECURITY: Honeypot field — hidden from real users, bots fill it */
 .hp-field { opacity:0; position:absolute; top:-9999px; left:-9999px; height:0; width:0; pointer-events:none; tab-index:-1; }
-/* SECURITY: Devtools warning banner */
-#sec-warn {
-  display:none; position:fixed; top:0; left:0; right:0; z-index:99999;
-  background:var(--red); color:#fff; text-align:center;
-  font-family:'Share Tech Mono',monospace; font-size:0.75rem; letter-spacing:0.2em;
-  padding:10px; text-transform:uppercase;
-}
-/* SECURITY: Blur overlay when devtools detected */
-#devtools-overlay {
-  display:none; position:fixed; inset:0; z-index:99998;
-  backdrop-filter:blur(18px); background:rgba(0,0,0,0.7);
-  align-items:center; justify-content:center; flex-direction:column; gap:1rem;
-}
-#devtools-overlay.active { display:flex; }
-#devtools-overlay p {
-  font-family:'Share Tech Mono',monospace; font-size:0.9rem; color:var(--red);
-  letter-spacing:0.2em; text-transform:uppercase; text-align:center;
-}
+
+
 
 /* RESPONSIVE */
 @media(max-width:1100px){
@@ -728,12 +712,8 @@ footer{position:relative;z-index:2;padding:60px 4rem;border-top:1px solid var(--
   </div>
 </div>
 
-<!-- SECURITY: Devtools detection overlay -->
-<div id="devtools-overlay">
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--red);letter-spacing:0.1em;">⚠ ACCESS DENIED</div>
-  <p>// DEVELOPER TOOLS DETECTED<br>Close DevTools to continue.</p>
-</div>
-<div id="sec-warn">⚠ Warning — Unauthorized inspection detected. This session has been flagged.</div>
+
+
 
 <!-- FOOTER -->
 <footer>
@@ -823,149 +803,15 @@ function selectGame(name) {
   document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
 }
 
-/* ============================================================
-   SECURITY LAYER 1 — IFRAME / CLICKJACKING BUST
-   ============================================================ */
-(function() {
-  if (window.self !== window.top) {
-    window.top.location.href = window.self.location.href;
-  }
-})();
 
-/* ============================================================
-   SECURITY LAYER 2 — DEVTOOLS DETECTION
-   Multiple vectors: size diff, toString override, debugger timing
-   ============================================================ */
-(function() {
-  const THRESHOLD = 160;
-  let _dtOpen = false;
-  const overlay = document.getElementById('devtools-overlay');
-  const warn = document.getElementById('sec-warn');
 
-  function checkDevtools() {
-    // Skip devtools detection on mobile — browser chrome causes false positives
-    if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || ('ontouchstart' in window)) return;
-    const widthDiff = window.outerWidth - window.innerWidth > THRESHOLD;
-    const heightDiff = window.outerHeight - window.innerHeight > THRESHOLD;
-    if (widthDiff || heightDiff) {
-      if (!_dtOpen) {
-        _dtOpen = true;
-        overlay.classList.add('active');
-        warn.style.display = 'block';
-        document.body.style.pointerEvents = 'none';
-        console.clear();
-        console.log('%c⛔ UNAUTHORIZED ACCESS DETECTED', 'color:red;font-size:24px;font-weight:bold;');
-        console.log('%cThis page is protected. Close DevTools.', 'color:#ff4444;font-size:14px;');
-      }
-    } else {
-      if (_dtOpen) {
-        _dtOpen = false;
-        overlay.classList.remove('active');
-        warn.style.display = 'none';
-        document.body.style.pointerEvents = '';
-      }
-    }
-  }
 
-  // Timing-based detection (debugger slows down execution)
-  function debuggerTrap() {
-    const before = performance.now();
-    (function() {})['constructor']('debugger')();
-    const after = performance.now();
-    if (after - before > 100) {
-      overlay.classList.add('active');
-      warn.style.display = 'block';
-    }
-  }
 
-  setInterval(checkDevtools, 800);
-  setInterval(debuggerTrap, 3000);
-  window.addEventListener('resize', checkDevtools);
-})();
 
-/* ============================================================
-   SECURITY LAYER 3 — RIGHT-CLICK & KEYBOARD SHORTCUT BLOCKING
-   ============================================================ */
-(function() {
-  // Block right-click context menu
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    return false;
-  });
 
-  // Block common dev/inspection shortcuts
-  document.addEventListener('keydown', function(e) {
-    // F12
-    if (e.key === 'F12') { e.preventDefault(); return false; }
-    // Ctrl+Shift+I / Cmd+Opt+I (DevTools)
-    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); return false; }
-    // Ctrl+Shift+J (Console)
-    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'J' || e.key === 'j')) { e.preventDefault(); return false; }
-    // Ctrl+Shift+C (Inspector)
-    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'C' || e.key === 'c')) { e.preventDefault(); return false; }
-    // Ctrl+U (View Source)
-    if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); return false; }
-    // Ctrl+S (Save page)
-    if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's')) { e.preventDefault(); return false; }
-    // Ctrl+A (Select all)
-    if ((e.ctrlKey || e.metaKey) && (e.key === 'A' || e.key === 'a')) { e.preventDefault(); return false; }
-  });
 
-  // Block drag-and-drop of page elements
-  document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
-})();
 
-/* ============================================================
-   SECURITY LAYER 4 — BOT / SCRAPER DETECTION
-   Checks for headless browser signals
-   ============================================================ */
-(function() {
-  const signals = [];
 
-  // Headless Chrome / Puppeteer
-  if (navigator.webdriver) signals.push('webdriver');
-  if (window._phantom || window.callPhantom) signals.push('phantomjs');
-  if (window.__nightmare) signals.push('nightmare');
-  if (!window.chrome && navigator.userAgent.includes('Chrome') && !(/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent))) signals.push('no-chrome-object');
-
-  // Missing plugins (headless browsers often have none)
-  // Exclude mobile devices — they legitimately have no plugins
-  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || ('ontouchstart' in window);
-  if (navigator.plugins.length === 0 && !navigator.userAgent.includes('Firefox') && !isMobile) {
-    signals.push('no-plugins');
-  }
-
-  // No touch events on "mobile" UA — only flag if truly mismatched (not a real mobile)
-  if (/Mobi/i.test(navigator.userAgent) && !('ontouchstart' in window) && !isMobile) {
-    signals.push('fake-mobile-ua');
-  }
-
-  if (signals.length >= 2) {
-    // Silently redirect bots to a dead end
-    document.body.innerHTML = '<div style="background:#000;color:#000;min-height:100vh;"></div>';
-    console.clear();
-  }
-})();
-
-/* ============================================================
-   SECURITY LAYER 5 — CONSOLE POISON / TRAP
-   Overwrites console so inspectors see warnings
-   ============================================================ */
-(function() {
-  const _warn = '%c⛔ CORROSIVE CHEATS — This console is monitored. Unauthorized automation will be reported.';
-  const _style = 'color:#ff1f1f;font-size:15px;font-weight:bold;background:#000;padding:6px 10px;';
-  const _orig = { log: console.log, warn: console.warn };
-
-  // Show trap message whenever console is opened (the log runs on open)
-  console.log(_warn, _style);
-  console.log('%cSession ID: ' + btoa(Date.now() + navigator.userAgent).slice(0, 24), 'color:#555;font-size:10px;');
-
-  // Override to append warning on every log call from outside
-  const _noop = function() {
-    _orig.log.apply(console, arguments);
-  };
-  window.onerror = function() { return true; }; // Suppress external error leaks
-})();
 
 /* ============================================================
    SECURITY LAYER 6 — FORM RATE LIMITING + HONEYPOT CHECK
@@ -1047,41 +893,7 @@ async function submitInquiry() {
   }
 }
 
-/* ============================================================
-   SECURITY LAYER 7 — SESSION INTEGRITY CHECK
-   Flags unusual session patterns
-   ============================================================ */
-(function() {
-  const _sessionStart = Date.now();
-  const _uid = Math.random().toString(36).slice(2);
 
-  // Detect if page was loaded inside an automation tool via timing
-  window.addEventListener('load', function() {
-    const loadTime = Date.now() - _sessionStart;
-    const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || ('ontouchstart' in window);
-    if (loadTime < 10 && !isMobileDevice) {
-      // Suspiciously fast — likely automated. Redirect to blank.
-      document.body.innerHTML = '';
-    }
-  });
-
-  // Passive mouse entropy check — bots rarely move mice naturally
-  let _mouseEvents = 0;
-  document.addEventListener('mousemove', function() { _mouseEvents++; }, { passive: true });
-
-  // After 8s, if zero mouse movement and user hasn't scrolled, likely a bot
-  setTimeout(function() {
-    if (_mouseEvents === 0 && window.scrollY === 0 && !('ontouchstart' in window)) {
-      // Silently disable form for suspected bots
-      const btn = document.querySelector('[onclick="submitInquiry()"]');
-      if (btn) btn.onclick = function() {
-        document.getElementById('formStatus').style.display = 'block';
-        document.getElementById('formStatus').style.color = 'var(--green)';
-        document.getElementById('formStatus').innerText = '// SUCCESS — We\'ll reach out on Discord shortly.';
-      };
-    }
-  }, 8000);
-})();
 
 /* GAME MODAL DATA */
 const GAME_DATA = {
