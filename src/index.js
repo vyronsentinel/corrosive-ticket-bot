@@ -3,10 +3,10 @@ const express = require('express');
 const cors = require('cors');
 
 // ─── CONFIG ────────────────────────────────────────────────────────────────────
-const BOT_TOKEN       = process.env.BOT_TOKEN;        // Discord bot token
-const GUILD_ID        = process.env.GUILD_ID;          // Your server ID
-const CATEGORY_ID     = process.env.CATEGORY_ID;       // Category where tickets go
-const STAFF_ROLE_ID   = process.env.STAFF_ROLE_ID;     // Role that can see tickets
+const BOT_TOKEN       = process.env.BOT_TOKEN;
+const GUILD_ID        = process.env.GUILD_ID;
+const CATEGORY_ID     = process.env.CATEGORY_ID;
+const STAFF_ROLE_ID   = process.env.STAFF_ROLE_ID;
 const PORT            = process.env.PORT || 3000;
 
 // ─── DISCORD CLIENT ────────────────────────────────────────────────────────────
@@ -15,6 +15,7 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
   ]
 });
 
@@ -26,17 +27,15 @@ client.once('clientReady', () => {
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGIN || '*', // Set to your website URL in production
+  origin: process.env.ALLOWED_ORIGIN || '*',
 }));
 
-// Health check
 app.get('/', (req, res) => res.json({ status: 'online' }));
 
 // ─── TICKET ENDPOINT ───────────────────────────────────────────────────────────
 app.post('/create-ticket', async (req, res) => {
   const { discord, game, message } = req.body;
 
-  // Basic validation
   if (!discord || !game) {
     return res.status(400).json({ error: 'Missing discord or game field.' });
   }
@@ -44,43 +43,60 @@ app.post('/create-ticket', async (req, res) => {
   try {
     const guild = await client.guilds.fetch(GUILD_ID);
 
-    // Sanitize discord name for channel name (lowercase, no special chars)
+    // Try to find the member in the server by username
+    await guild.members.fetch(); // fetch all members
+    const member = guild.members.cache.find(m =>
+      m.user.username.toLowerCase() === discord.toLowerCase() ||
+      m.user.tag.toLowerCase() === discord.toLowerCase() ||
+      `${m.user.username}#${m.user.discriminator}`.toLowerCase() === discord.toLowerCase()
+    );
+
     const safeName = discord.replace(/[^a-zA-Z0-9_]/g, '').toLowerCase().slice(0, 20) || 'user';
     const channelName = `ticket-${safeName}-${Date.now().toString().slice(-4)}`;
 
-    // Create the private ticket channel
+    // Build permission overwrites
+    const permissionOverwrites = [
+      {
+        id: guild.roles.everyone,
+        deny: [PermissionsBitField.Flags.ViewChannel],
+      },
+      ...(STAFF_ROLE_ID ? [{
+        id: STAFF_ROLE_ID,
+        allow: [
+          PermissionsBitField.Flags.ViewChannel,
+          PermissionsBitField.Flags.SendMessages,
+          PermissionsBitField.Flags.ReadMessageHistory,
+        ],
+      }] : []),
+      {
+        id: client.user.id,
+        allow: [
+          PermissionsBitField.Flags.ViewChannel,
+          PermissionsBitField.Flags.SendMessages,
+          PermissionsBitField.Flags.ManageChannels,
+        ],
+      },
+    ];
+
+    // If member found in server, add them to the channel
+    if (member) {
+      permissionOverwrites.push({
+        id: member.id,
+        allow: [
+          PermissionsBitField.Flags.ViewChannel,
+          PermissionsBitField.Flags.SendMessages,
+          PermissionsBitField.Flags.ReadMessageHistory,
+        ],
+      });
+    }
+
     const ticketChannel = await guild.channels.create({
       name: channelName,
       type: ChannelType.GuildText,
       parent: CATEGORY_ID || null,
-      permissionOverwrites: [
-        // Deny everyone
-        {
-          id: guild.roles.everyone,
-          deny: [PermissionsBitField.Flags.ViewChannel],
-        },
-        // Allow staff role
-        ...(STAFF_ROLE_ID ? [{
-          id: STAFF_ROLE_ID,
-          allow: [
-            PermissionsBitField.Flags.ViewChannel,
-            PermissionsBitField.Flags.SendMessages,
-            PermissionsBitField.Flags.ReadMessageHistory,
-          ],
-        }] : []),
-        // Allow the bot itself
-        {
-          id: client.user.id,
-          allow: [
-            PermissionsBitField.Flags.ViewChannel,
-            PermissionsBitField.Flags.SendMessages,
-            PermissionsBitField.Flags.ManageChannels,
-          ],
-        },
-      ],
+      permissionOverwrites,
     });
 
-    // Build the embed
     const embed = new EmbedBuilder()
       .setTitle('🎫 New Order Ticket')
       .setColor(0xFF1F1F)
@@ -92,7 +108,6 @@ app.post('/create-ticket', async (req, res) => {
       .setFooter({ text: 'Corrosive Cheats • corrosivecheats.netlify.app' })
       .setTimestamp();
 
-    // Close button
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId('close_ticket')
@@ -101,13 +116,22 @@ app.post('/create-ticket', async (req, res) => {
     );
 
     const staffMention = STAFF_ROLE_ID ? `<@&${STAFF_ROLE_ID}>` : '@here';
+    const userMention = member ? `<@${member.id}>` : `**${discord}**`;
+
     await ticketChannel.send({
-      content: `${staffMention} — New ticket from **${discord}**`,
+      content: `${staffMention} — New ticket from ${userMention}`,
       embeds: [embed],
       components: [row],
     });
 
-    console.log(`✅ Ticket created: #${channelName} for ${discord}`);
+    // Send a welcome message to the customer if they're in the server
+    if (member) {
+      await ticketChannel.send({
+        content: `👋 Welcome ${userMention}! Our staff will be with you shortly. Please describe your inquiry here.`,
+      });
+    }
+
+    console.log(`✅ Ticket created: #${channelName} for ${discord} (member found: ${!!member})`);
     res.json({ success: true, channel: channelName });
 
   } catch (err) {
