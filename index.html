@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- SECURITY: Prevent MIME sniffing -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff"/>
+<!-- SECURITY: Prevent clickjacking via meta (supplement for servers without headers) -->
+<meta http-equiv="X-Frame-Options" content="DENY"/>
+<!-- SECURITY: Disable referrer leakage -->
+<meta name="referrer" content="no-referrer"/>
+<!-- SECURITY: Prevent caching of sensitive page -->
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://corrosive-ticket-bot-production.up.railway.app; script-src 'self' 'unsafe-inline' https://embed.tawk.to; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src https://tawk.to;"/>
+<!-- SECURITY: Robots — keep page off search engines / scrapers -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet"/>
+<title>CORROSIVE CHEATS — ELITE ENHANCEMENTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #FF1F1F;
+  --red-glow: rgba(255,31,31,0.45);
+  --red-dim: rgba(255,31,31,0.08);
+  --bg: #060606;
+  --bg2: #0c0c0c;
+  --bg3: #111;
+  --text: #F0F0F0;
+  --muted: #555;
+  --muted2: #888;
+  --green: #00FF88;
+  --border: rgba(255,255,255,0.06);
+  --border-red: rgba(255,31,31,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Rajdhani',sans-serif;font-weight:500;
+  line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:#000}
+::-webkit-scrollbar-thumb{background:var(--red)}
+#cvs{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.35}
+.scanlines{
+  position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.04) 3px,rgba(0,0,0,0.04) 4px);
+}
+.vignette{
+  position:fixed;inset:0;z-index:9997;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,0.7) 100%);
+}
+.corner{position:fixed;width:55px;height:55px;z-index:200;pointer-events:none;opacity:0.5}
+.corner-tl{top:14px;left:14px;border-top:1px solid var(--red);border-left:1px solid var(--red)}
+.corner-tr{top:14px;right:14px;border-top:1px solid var(--red);border-right:1px solid var(--red)}
+.corner-bl{bottom:14px;left:14px;border-bottom:1px solid var(--red);border-left:1px solid var(--red)}
+.corner-br{bottom:14px;right:14px;border-bottom:1px solid var(--red);border-right:1px solid var(--red)}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:68px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;
+  background:rgba(6,6,6,0.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);transition:all 0.3s ease;
+}
+nav.scrolled{height:54px;border-bottom-color:var(--border-red);box-shadow:0 1px 40px rgba(255,31,31,0.06)}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.08em;
+  text-decoration:none;color:var(--text);display:flex;align-items:center;gap:4px;position:relative;
+}
+.nav-logo .acc{color:var(--red);text-shadow:0 0 20px var(--red-glow)}
+.nav-logo::before{
+  content:'';position:absolute;left:-12px;top:50%;transform:translateY(-50%);
+  width:3px;height:60%;background:var(--red);box-shadow:0 0 10px var(--red);
+}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--muted2);font-size:0.78rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.15em;transition:color 0.2s;position:relative;
+}
+.nav-links a::before{
+  content:'//';color:var(--red);margin-right:5px;opacity:0;
+  transition:opacity 0.2s;font-family:'Share Tech Mono',monospace;font-size:0.6rem;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::before{opacity:1}
+.nav-btn{
+  font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--red)!important;border:1px solid var(--red);
+  padding:9px 20px;text-decoration:none;position:relative;overflow:hidden;transition:all 0.3s;
+}
+.nav-btn::before{
+  content:'';position:absolute;inset:0;background:var(--red);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease;z-index:-1;
+}
+.nav-btn:hover{color:#fff!important}
+.nav-btn:hover::before{transform:scaleX(1)}
+
+/* HERO */
+#hero{
+  position:relative;z-index:2;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:90px 2rem 70px;text-align:center;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,31,31,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,31,31,0.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse at center,black 20%,transparent 72%);
+  pointer-events:none;
+}
+.hero-orb{
+  position:absolute;width:800px;height:500px;
+  background:radial-gradient(ellipse,rgba(255,31,31,0.055) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;
+  animation:orbPulse 5s ease-in-out infinite;
+}
+@keyframes orbPulse{0%,100%{opacity:0.7;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}}
+
+.eyebrow{
+  font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--red);
+  letter-spacing:0.5em;text-transform:uppercase;margin-bottom:2rem;
+  display:flex;align-items:center;gap:14px;
+  opacity:0;animation:fadeUp 0.7s 0.1s ease forwards;
+}
+.eyebrow span{width:50px;height:1px;background:currentColor;opacity:0.4}
+
+.logo-wrap{
+  margin-bottom:2rem;opacity:0;animation:fadeUp 0.7s 0.2s ease forwards;
+}
+.hero-logo{
+  width:260px;height:auto;filter:drop-shadow(0 0 25px rgba(255,31,31,0.2));
+  animation:logoFloat 7s ease-in-out infinite;transition:filter 0.4s;
+}
+.hero-logo:hover{filter:drop-shadow(0 0 55px rgba(255,31,31,0.65));animation-play-state:paused}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4.5rem,13vw,10rem);line-height:0.88;letter-spacing:0.02em;
+  text-transform:uppercase;margin-bottom:1.5rem;
+  opacity:0;animation:fadeUp 0.7s 0.3s ease forwards;
+}
+.hero-title .solid{display:block;color:var(--text)}
+.hero-title .outline{display:block;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,0.15);position:relative}
+.glitch{position:relative;display:inline-block}
+.glitch::before,.glitch::after{
+  content:attr(data-text);position:absolute;top:0;left:0;
+  font-family:'Bebas Neue',sans-serif;font-size:inherit;line-height:inherit;letter-spacing:inherit;width:100%;
+}
+.glitch::before{color:#ff0040;animation:glA 5s infinite;clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%)}
+.glitch::after{color:#00ffff;animation:glB 5s infinite;clip-path:polygon(0 58%,100% 58%,100% 76%,0 76%)}
+@keyframes glA{0%,88%,100%{transform:translate(0);opacity:0}90%{transform:translate(-4px,1px);opacity:0.8}92%{transform:translate(4px,-1px);opacity:0.8}94%{transform:translate(0);opacity:0}}
+@keyframes glB{0%,88%,100%{transform:translate(0);opacity:0}91%{transform:translate(4px,1px);opacity:0.6}93%{transform:translate(-4px,-1px);opacity:0.6}95%{transform:translate(0);opacity:0}}
+
+.hero-desc{
+  max-width:480px;font-size:1rem;color:var(--muted2);
+  margin-bottom:2.5rem;line-height:1.7;font-weight:400;
+  opacity:0;animation:fadeUp 0.7s 0.4s ease forwards;
+}
+.hero-actions{
+  display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:center;
+  opacity:0;animation:fadeUp 0.7s 0.5s ease forwards;
+}
+.hero-stats{
+  display:flex;gap:0;margin-top:5rem;
+  border-top:1px solid var(--border);padding-top:3rem;
+  opacity:0;animation:fadeUp 0.7s 0.7s ease forwards;
+}
+.stat{flex:1;text-align:center;padding:0 2rem;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;line-height:1;color:var(--text);display:block}
+.stat-num em{color:var(--red);font-style:normal}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.25em;text-transform:uppercase;display:block;margin-top:4px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* BUTTONS */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:13px 30px;
+  font-family:'Share Tech Mono',monospace;font-size:0.75rem;
+  text-decoration:none;text-transform:uppercase;letter-spacing:0.12em;
+  cursor:pointer;border:none;position:relative;overflow:hidden;
+  transition:all 0.25s ease;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);
+  transform:translateX(-100%);transition:transform 0.5s;
+}
+.btn-primary:hover{box-shadow:0 0 30px var(--red-glow);transform:translateY(-2px)}
+.btn-primary:hover::before{transform:translateX(100%)}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.15)}
+.btn-secondary:hover{border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.04);transform:translateY(-2px)}
+
+/* TICKER */
+.ticker-wrap{
+  position:relative;z-index:2;background:#000;
+  border-top:1px solid var(--border-red);border-bottom:1px solid var(--border-red);
+  padding:12px 0;overflow:hidden;
+}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;width:120px;height:100%;z-index:2}
+.ticker-wrap::before{left:0;background:linear-gradient(90deg,#000,transparent)}
+.ticker-wrap::after{right:0;background:linear-gradient(-90deg,#000,transparent)}
+.ticker-track{display:inline-flex;animation:tick 22s linear infinite;white-space:nowrap}
+.ticker-item{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Share Tech Mono',monospace;font-size:0.68rem;
+  color:var(--muted);text-transform:uppercase;letter-spacing:0.18em;
+  padding:0 2.5rem;transition:color 0.2s;
+}
+.ticker-item:hover{color:var(--text)}
+.pip{width:4px;height:4px;background:var(--red);border-radius:50%;box-shadow:0 0 6px var(--red);flex-shrink:0}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* CATALOG */
+#catalog{position:relative;z-index:2;padding:100px 4rem;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
+.sec-header{margin-bottom:4rem;text-align:center}
+.sec-tag{
+  font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--red);
+  text-transform:uppercase;letter-spacing:0.45em;margin-bottom:1rem;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+}
+.sec-tag::before,.sec-tag::after{content:'';width:40px;height:1px;background:var(--red);opacity:0.4}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:4rem;letter-spacing:0.05em;color:var(--text);line-height:1;margin-bottom:1rem}
+.sec-desc{color:var(--muted2);font-size:0.95rem;max-width:500px;margin:0 auto;font-weight:400}
+
+.search-wrap{position:relative;max-width:520px;margin:2.5rem auto}
+.search-wrap::before{
+  content:'SEARCH_';position:absolute;left:18px;top:50%;transform:translateY(-50%);
+  font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--red);
+  letter-spacing:0.05em;pointer-events:none;z-index:1;
+}
+.search-input{
+  width:100%;background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);border-left:2px solid var(--red);
+  padding:15px 20px 15px 90px;color:var(--text);
+  font-family:'Share Tech Mono',monospace;font-size:0.85rem;letter-spacing:0.05em;
+  transition:all 0.25s;outline:none;
+}
+.search-input::placeholder{color:var(--muted)}
+.search-input:focus{border-color:var(--red);background:rgba(255,31,31,0.03);box-shadow:0 0 20px rgba(255,31,31,0.07)}
+
+/* GAME CARDS */
+.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
+.game-card{
+  display:none;position:relative;background:var(--bg2);border:1px solid var(--border);
+  overflow:hidden;cursor:pointer;
+  transition:transform 0.3s ease,border-color 0.3s ease,box-shadow 0.3s ease;
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
+}
+.game-card.visible{display:block;animation:cardIn 0.4s ease both}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.game-card-img-wrap{position:relative;height:200px;overflow:hidden}
+.game-card-img-wrap img{
+  width:100%;height:100%;object-fit:cover;object-position:top;
+  transition:transform 0.5s ease,filter 0.4s ease;
+  filter:grayscale(25%) brightness(0.75) contrast(1.05);
+}
+.game-card-img-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 30%,rgba(12,12,12,0.6) 70%,var(--bg2) 100%);
+}
+.card-corner{
+  position:absolute;top:0;right:0;z-index:3;
+  width:0;height:0;border-style:solid;
+  border-width:0 28px 28px 0;border-color:transparent var(--red) transparent transparent;
+  opacity:0;transition:opacity 0.3s;
+}
+.status-badge{
+  position:absolute;top:12px;left:12px;z-index:3;
+  font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#000;
+  background:var(--green);padding:3px 8px;letter-spacing:0.12em;
+  text-transform:uppercase;display:flex;align-items:center;gap:5px;
+}
+.status-badge::before{content:'';width:5px;height:5px;background:#000;border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.game-card-body{padding:1.2rem 1.4rem 1.4rem;position:relative}
+.game-card-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.05em;color:var(--text);line-height:1;margin-bottom:0.5rem}
+.game-card-meta{
+  font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--muted);
+  letter-spacing:0.15em;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.card-cta{color:var(--red);opacity:0;transform:translateX(-6px);transition:all 0.3s}
+.card-cta::after{content:' →'}
+.game-card:hover{border-color:var(--border-red);transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.6),0 0 30px rgba(255,31,31,0.06)}
+.game-card:hover .game-card-img-wrap img{transform:scale(1.07);filter:grayscale(0%) brightness(0.9) contrast(1.05)}
+.game-card:hover .card-corner{opacity:1}
+.game-card:hover .card-cta{opacity:1;transform:translateX(0)}
+.game-card:hover .game-card-title{color:#fff}
+.no-results{text-align:center;color:var(--muted);padding:3rem;font-family:'Share Tech Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;display:none}
+.no-results.visible{display:block}
+.cat-footer{
+  margin-top:3.5rem;text-align:center;font-family:'Share Tech Mono',monospace;
+  font-size:0.65rem;color:var(--red);letter-spacing:0.3em;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:16px;opacity:0.6;
+}
+.cat-footer::before,.cat-footer::after{content:'';width:80px;height:1px;background:var(--red);opacity:0.4}
+
+/* FEATURES */
+#features{position:relative;z-index:2;padding:100px 4rem;background:var(--bg)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.feature-card{background:var(--bg);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background 0.3s}
+.feature-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:var(--red);transition:height 0.4s ease;box-shadow:0 0 12px var(--red)}
+.feature-card:hover{background:var(--bg2)}
+.feature-card:hover::before{height:100%}
+.feat-num{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--red);letter-spacing:0.2em;margin-bottom:1.5rem;display:block;opacity:0.7}
+.feat-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.8rem;transition:color 0.3s}
+.feature-card:hover .feat-title{color:#fff}
+.feat-desc{color:var(--muted2);font-size:0.9rem;line-height:1.6;font-weight:400}
+
+/* ORDER */
+#order{position:relative;z-index:2;padding:100px 4rem;background:var(--bg2)}
+.order-inner{
+  max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.2fr 0.8fr;
+  gap:5rem;border:1px solid var(--border);padding:4.5rem;position:relative;background:var(--bg);
+}
+.order-inner::before,.order-inner::after{content:'';position:absolute;width:20px;height:20px}
+.order-inner::before{top:-1px;left:-1px;border-top:2px solid var(--red);border-left:2px solid var(--red)}
+.order-inner::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--red);border-right:2px solid var(--red)}
+.order-steps{display:flex;flex-direction:column;gap:2rem;margin-top:2.5rem}
+.order-step{display:flex;gap:1.5rem;align-items:flex-start}
+.step-num{
+  width:36px;height:36px;flex-shrink:0;border:1px solid var(--border-red);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--red);position:relative;
+}
+.step-num::after{content:'';position:absolute;inset:-4px;border:1px solid var(--border-red);opacity:0.3}
+.step-info h4{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.05em;margin-bottom:3px}
+.step-info p{color:var(--muted2);font-size:0.88rem;font-weight:400}
+.form-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.05em;margin-bottom:1.8rem}
+.form-group{margin-bottom:1.2rem}
+.form-group label{display:block;font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px}
+.form-control{
+  width:100%;background:#0a0a0a;border:none;
+  border-bottom:1px solid var(--border);border-left:2px solid transparent;
+  padding:11px 14px;color:var(--text);font-family:'Rajdhani',sans-serif;
+  font-size:0.95rem;font-weight:500;transition:all 0.25s;outline:none;
+}
+.form-control:focus{border-bottom-color:var(--red);border-left-color:var(--red);background:#0d0d0d}
+.form-control::placeholder{color:var(--muted)}
+select.form-control option{background:#111;color:var(--text)}
+textarea.form-control{resize:vertical;min-height:90px}
+#formStatus{margin-top:1rem;font-family:'Share Tech Mono',monospace;font-size:0.72rem;text-align:center;letter-spacing:0.08em;display:none}
+
+/* FOOTER */
+footer{position:relative;z-index:2;padding:60px 4rem;border-top:1px solid var(--border);background:var(--bg);text-align:center}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.1em;margin-bottom:1.8rem}
+.footer-logo em{color:var(--red);font-style:normal;text-shadow:0 0 20px var(--red-glow)}
+.footer-links{display:flex;justify-content:center;gap:3rem;margin-bottom:2.5rem}
+.footer-links a{color:var(--muted2);text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s}
+.footer-links a:hover{color:var(--red)}
+.copyright{color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:0.15em}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:0.1s}
+.reveal-d2{transition-delay:0.2s}
+.reveal-d3{transition-delay:0.3s}
+
+/* MODAL */
+.modal-overlay{
+  position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;opacity:0;pointer-events:none;transition:opacity 0.3s ease;
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{
+  position:relative;background:var(--bg);border:1px solid var(--border-red);
+  max-width:580px;width:100%;
+  clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));
+  transform:translateY(24px) scale(0.97);transition:transform 0.35s ease,opacity 0.35s ease;opacity:0;
+}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1);opacity:1}
+.modal-img{position:relative;height:200px;overflow:hidden}
+.modal-img img{width:100%;height:100%;object-fit:cover;object-position:top;filter:brightness(0.7) contrast(1.05)}
+.modal-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,var(--bg) 100%)}
+.modal-badge{position:absolute;top:14px;left:14px;z-index:2;font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#000;background:var(--green);padding:3px 9px;letter-spacing:0.12em;text-transform:uppercase;display:flex;align-items:center;gap:5px}
+.modal-badge::before{content:'';width:5px;height:5px;background:#000;border-radius:50%;animation:blink 2s infinite}
+.modal-close{
+  position:absolute;top:14px;right:14px;z-index:10;
+  width:32px;height:32px;background:rgba(0,0,0,0.6);border:1px solid var(--border-red);
+  color:var(--muted2);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;font-family:'Share Tech Mono',monospace;line-height:1;
+}
+.modal-close:hover{color:#fff;border-color:var(--red);background:rgba(255,31,31,0.15)}
+.modal-body{padding:1.5rem 2rem 2rem}
+.modal-genre{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--red);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:0.05em;color:#fff;line-height:1;margin-bottom:1.2rem}
+.modal-features{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.8rem}
+.modal-feat-tag{
+  font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;
+  padding:5px 12px;border:1px solid var(--border-red);color:var(--muted2);background:var(--red-dim);
+  position:relative;overflow:hidden;transition:all 0.2s;
+}
+.modal-feat-tag::before{content:'> ';color:var(--red);opacity:0.7}
+.modal-feat-tag:hover{color:#fff;border-color:var(--red);background:rgba(255,31,31,0.12)}
+.modal-actions{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap}
+.yt-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,0,0,0.08);border:1px solid rgba(255,0,0,0.35);
+  padding:8px 14px;cursor:pointer;text-decoration:none;
+  color:#ccc;font-family:'Share Tech Mono',monospace;font-size:0.7rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  transition:all 0.25s ease;
+}
+.yt-btn:hover{background:rgba(255,0,0,0.2);border-color:#ff0000;color:#fff;box-shadow:0 0 16px rgba(255,0,0,0.25)}
+.yt-btn svg{flex-shrink:0;filter:drop-shadow(0 0 4px rgba(255,0,0,0.4))}
+.modal-divider{height:1px;background:var(--border);margin:0 2rem 0}
+
+/* SECURITY: Disable text selection on sensitive UI elements */
+.game-card, .modal-box, .nav-logo, .hero-title, .modal-title {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+/* SECURITY: Honeypot field — hidden from real users, bots fill it */
+.hp-field { opacity:0; position:absolute; top:-9999px; left:-9999px; height:0; width:0; pointer-events:none; tab-index:-1; }
+/* SECURITY: Devtools warning banner */
+#sec-warn {
+  display:none; position:fixed; top:0; left:0; right:0; z-index:99999;
+  background:var(--red); color:#fff; text-align:center;
+  font-family:'Share Tech Mono',monospace; font-size:0.75rem; letter-spacing:0.2em;
+  padding:10px; text-transform:uppercase;
+}
+/* SECURITY: Blur overlay when devtools detected */
+#devtools-overlay {
+  display:none; position:fixed; inset:0; z-index:99998;
+  backdrop-filter:blur(18px); background:rgba(0,0,0,0.7);
+  align-items:center; justify-content:center; flex-direction:column; gap:1rem;
+}
+#devtools-overlay.active { display:flex; }
+#devtools-overlay p {
+  font-family:'Share Tech Mono',monospace; font-size:0.9rem; color:var(--red);
+  letter-spacing:0.2em; text-transform:uppercase; text-align:center;
+}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .features-grid{grid-template-columns:repeat(2,1fr)}
+  .order-inner{grid-template-columns:1fr;gap:3.5rem;padding:3rem}
+}
+@media(max-width:768px){
+  nav{padding:0 1.5rem}.nav-links{display:none}
+  #catalog,#features,#order{padding:80px 1.5rem}
+  .features-grid{grid-template-columns:1fr}
+  .catalog-grid{grid-template-columns:1fr}
+  .hero-stats{flex-direction:column;gap:2rem}
+  .stat{border-right:none;border-bottom:1px solid var(--border);padding-bottom:2rem}
+  .stat:last-child{border-bottom:none}
+  .corner{display:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="cvs"></canvas>
+<div class="scanlines"></div>
+<div class="vignette"></div>
+<div class="corner corner-tl"></div>
+<div class="corner corner-tr"></div>
+<div class="corner corner-bl"></div>
+<div class="corner corner-br"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">CORROSIVE<span class="acc">.</span>CHEATS</a>
+  <ul class="nav-links">
+    <li><a href="#catalog">Games</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#order">Purchase</a></li>
+    <li><a href="https://discord.gg/Q9k7xT48" target="_blank" class="nav-btn">Join Discord</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb"></div>
+
+  <div class="eyebrow"><span></span>Universal Software Solutions<span></span></div>
+
+  <div class="logo-wrap">
+    <img src="corrosivecheats.png" alt="Corrosive Cheats" class="hero-logo"/>
+  </div>
+
+  <h1 class="hero-title">
+    <span class="solid">ANY GAME.</span>
+    <span class="outline"><span class="glitch" data-text="EVERY ADVANTAGE.">EVERY ADVANTAGE.</span></span>
+  </h1>
+
+  <p class="hero-desc">The most comprehensive enhancement suite for every competitive title imaginable. If you can play it, we can perfect it.</p>
+
+  <div class="hero-actions">
+    <a href="#order" class="btn btn-primary">Get Started Now</a>
+    <a href="#catalog" class="btn btn-secondary">Browse Games</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">7<em>+</em></span>
+      <span class="stat-label">Supported Titles</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">99<em>%</em></span>
+      <span class="stat-label">Undetected Rate</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">24<em>/7</em></span>
+      <span class="stat-label">Live Support</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num"><em>&lt;</em>5m</span>
+      <span class="stat-label">Avg Response Time</span>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="pip"></span>Undetected</span>
+    <span class="ticker-item"><span class="pip"></span>Precision Aimbot</span>
+    <span class="ticker-item"><span class="pip"></span>ESP / Wallhack</span>
+    <span class="ticker-item"><span class="pip"></span>No Recoil</span>
+    <span class="ticker-item"><span class="pip"></span>Radar Hack</span>
+    <span class="ticker-item"><span class="pip"></span>Kernel Bypass</span>
+    <span class="ticker-item"><span class="pip"></span>24/7 Support</span>
+    <span class="ticker-item"><span class="pip"></span>Instant Updates</span>
+    <span class="ticker-item"><span class="pip"></span>Undetected</span>
+    <span class="ticker-item"><span class="pip"></span>Precision Aimbot</span>
+    <span class="ticker-item"><span class="pip"></span>ESP / Wallhack</span>
+    <span class="ticker-item"><span class="pip"></span>No Recoil</span>
+    <span class="ticker-item"><span class="pip"></span>Radar Hack</span>
+    <span class="ticker-item"><span class="pip"></span>Kernel Bypass</span>
+    <span class="ticker-item"><span class="pip"></span>24/7 Support</span>
+    <span class="ticker-item"><span class="pip"></span>Instant Updates</span>
+  </div>
+</div>
+
+<!-- CATALOG -->
+<section id="catalog">
+  <div class="sec-header reveal">
+    <div class="sec-tag">Ecosystem</div>
+    <h2 class="sec-title">Supported Titles.</h2>
+    <p class="sec-desc">Elite enhancements for top competitive titles. Search below or join Discord for more.</p>
+  </div>
+
+  <div class="search-wrap reveal">
+    <input type="text" id="gameSearch" class="search-input" placeholder="type to filter..." autocomplete="off">
+  </div>
+
+  <div class="catalog-grid" id="catalogGrid">
+
+    <div class="game-card visible" data-game="valorant" onclick="openModal('Valorant')">
+      <div class="status-badge">Undetected</div>
+      <div class="card-corner"></div>
+      <div class="game-card-img-wrap"><img src="valorant.png" alt="Valorant"></div>
+      <div class="game-card-body">
+        <div class="game-card-title">Valorant</div>
+        <div class="game-card-meta"><span>Tactical FPS</span><span class="card-cta">Order</span></div>
+      </div>
+    </div>
+
+    <div class="game-card visible" data-game="dota2" onclick="openModal('Dota2')">
+      <div class="status-badge">Undetected</div>
+      <div class="card-corner"></div>
+      <div class="game-card-img-wrap"><img src="dota2.png" alt="Dota2"></div>
+      <div class="game-card-body">
+        <div class="game-card-title">Dota 2</div>
+        <div class="game-card-meta"><span>MOBA</span><span class="card-cta">Order</span></div>
+      </div>
+    </div>
+
+    <div class="game-card visible" data-game="bloodstrike" onclick="openModal('Bloodstrike')">
+      <div class="status-badge">Undetected</div>
+      <div class="card-corner"></div>
+      <div class="game-card-img-wrap"><img src="bloodstrike.png" alt="Bloodstrike"></div>
+      <div class="game-card-body">
+        <div class="game-card-title">Bloodstrike</div>
+        <div class="game-card-meta"><span>Battle Royale</span><span class="card-cta">Order</span></div>
+      </div>
+    </div>
+
+    <div class="game-card visible" data-game="cs2" onclick="openModal('CS2')">
+      <div class="status-badge">Undetected</div>
+      <div class="card-corner"></div>
+      <div class="game-card-img-wrap"><img src="cs2.png" alt="CS2"></div>
+      <div class="game-card-body">
+        <div class="game-card-title">Counter-Strike 2</div>
+        <div class="game-card-meta"><span>Tactical FPS</span><span class="card-cta">Order</span></div>
+      </div>
+    </div>
+
+    <div class="game-card visible" data-game="special force" onclick="openModal('Special Force')">
+      <div class="status-badge">Undetected</div>
+      <div class="card-corner"></div>
+      <div class="game-card-img-wrap"><img src="Special-Force.png" alt="Special Force"></div>
+      <div class="game-card-body">
+        <div class="game-card-title">Special Force</div>
+        <div class="game-card-meta"><span>FPS</span><span class="card-cta">Order</span></div>
+      </div>
+    </div>
+
+    <div class="game-card visible" data-game="roblox" onclick="openModal('Roblox')">
+      <div class="status-badge">Undetected</div>
+      <div class="card-corner"></div>
+      <div class="game-card-img-wrap"><img src="roblox.png" alt="Roblox"></div>
+      <div class="game-card-body">
+        <div class="game-card-title">Roblox</div>
+        <div class="game-card-meta"><span>Platform</span><span class="card-cta">Order</span></div>
+      </div>
+    </div>
+
+    <div class="game-card visible" data-game="ran online" onclick="openModal('Ran Online')">
+      <div class="status-badge">Undetected</div>
+      <div class="card-corner"></div>
+      <div class="game-card-img-wrap"><img src="ran.png" alt="Ran Online"></div>
+      <div class="game-card-body">
+        <div class="game-card-title">Ran Online</div>
+        <div class="game-card-meta"><span>MMORPG</span><span class="card-cta">Order</span></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="no-results" id="noResults">// NO_RESULTS — join Discord to request your game</div>
+  <div class="cat-footer reveal">Join Discord for Full Details &amp; Latest Updates</div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="sec-header reveal">
+    <div class="sec-tag">Arsenal</div>
+    <h2 class="sec-title">The Competitive Edge.</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal"><span class="feat-num">// 01</span><h3 class="feat-title">Precision Aimbot</h3><p class="feat-desc">Bone-based silent aim with adjustable FOV, smoothing, and prediction. Locks targets instantly with human-like movement.</p></div>
+    <div class="feature-card reveal reveal-d1"><span class="feat-num">// 02</span><h3 class="feat-title">Full ESP Suite</h3><p class="feat-desc">Comprehensive visual overlays including player skeletons, health bars, distance, and loot highlights.</p></div>
+    <div class="feature-card reveal reveal-d2"><span class="feat-num">// 03</span><h3 class="feat-title">Kernel Bypass</h3><p class="feat-desc">Advanced driver-level protection with daily signature updates to stay ahead of leading anti-cheat engines.</p></div>
+    <div class="feature-card reveal"><span class="feat-num">// 04</span><h3 class="feat-title">No Recoil</h3><p class="feat-desc">Flawless compensation for every weapon in the game. Laser-accurate spray control that looks legitimate.</p></div>
+    <div class="feature-card reveal reveal-d1"><span class="feat-num">// 05</span><h3 class="feat-title">Real-time Radar</h3><p class="feat-desc">Interactive on-screen radar showing enemy positions. Never be surprised by a flank again.</p></div>
+    <div class="feature-card reveal reveal-d2"><span class="feat-num">// 06</span><h3 class="feat-title">Instant Setup</h3><p class="feat-desc">Download, inject, and play. Our streamlined loader ensures you're ready to dominate in minutes.</p></div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section id="order">
+  <div class="sec-header reveal">
+    <div class="sec-tag">Purchase</div>
+    <h2 class="sec-title">Join Our Community.</h2>
+  </div>
+  <div class="order-inner reveal">
+    <div class="order-content">
+      <p style="color:var(--muted2);font-size:0.95rem;font-weight:400">Connect with our team on Discord to discuss pricing, packages, and get personalized setup assistance.</p>
+      <div class="order-steps">
+        <div class="order-step">
+          <div class="step-num">01</div>
+          <div class="step-info"><h4>Join Discord</h4><p>Connect with our community and support team.</p></div>
+        </div>
+        <div class="order-step">
+          <div class="step-num">02</div>
+          <div class="step-info"><h4>Discuss Pricing</h4><p>Talk with our team about packages and pricing options.</p></div>
+        </div>
+        <div class="order-step">
+          <div class="step-num">03</div>
+          <div class="step-info"><h4>Get Your Key</h4><p>Receive your license key and start dominating immediately.</p></div>
+        </div>
+      </div>
+      <a href="https://discord.gg/Q9k7xT48" target="_blank" class="btn btn-primary" style="margin-top:2.5rem">Join Discord Server</a>
+    </div>
+    <div class="order-form-wrap">
+      <div class="form-title">Quick Inquiry</div>
+      <div class="form-group">
+        <label>Discord Username</label>
+        <input type="text" id="discord" class="form-control" placeholder="user#0000">
+      </div>
+      <div class="form-group">
+        <label>Select Game</label>
+        <select id="game" class="form-control">
+          <option value="">Choose a game...</option>
+          <option>Valorant</option><option>Dota2</option><option>Bloodstrike</option>
+          <option>CS2</option><option>Special Force</option><option>Roblox</option>
+          <option>Ran Online</option><option>Other / Not Listed</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="message" class="form-control" placeholder="Any questions or special requests..."></textarea>
+      </div>
+      <!-- SECURITY: Honeypot — bots fill this, humans don't see it -->
+      <div class="hp-field" aria-hidden="true"><input type="text" id="hp_name" name="hp_name" tabindex="-1" autocomplete="off" placeholder="Leave empty"></div>
+      <button onclick="submitInquiry()" class="btn btn-primary" style="width:100%;margin-top:1rem;justify-content:center;font-size:0.78rem;letter-spacing:0.15em;padding:14px">Send Inquiry</button>
+      <div id="formStatus"></div>
+      <p style="font-size:0.7rem;color:var(--muted);margin-top:1rem;text-align:center;font-family:'Share Tech Mono',monospace;letter-spacing:0.06em">Response within minutes on Discord.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GAME MODAL -->
+<div class="modal-overlay" id="gameModal" onclick="closeModal(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeGameModal()">✕</button>
+    <div class="modal-img">
+      <div class="modal-badge">Undetected</div>
+      <img id="modalImg" src="" alt="">
+    </div>
+    <div class="modal-body">
+      <div class="modal-genre" id="modalGenre"></div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-features" id="modalFeatures"></div>
+      <div class="modal-divider"></div>
+      <div class="modal-actions" style="margin-top:1.5rem">
+        <button class="btn btn-primary" onclick="orderFromModal()" id="modalOrderBtn">Order Now</button>
+        <a href="https://discord.gg/Q9k7xT48" target="_blank" class="btn btn-secondary">Join Discord</a>
+        <a id="modalYoutubeBtn" href="#" target="_blank" class="yt-btn" title="Watch on YouTube" style="display:none">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 71.412 50" width="36" height="26"><path d="M69.898 7.826A8.966 8.966 0 0 0 63.598 1.5C58.032 0 35.706 0 35.706 0S13.38 0 7.814 1.5A8.966 8.966 0 0 0 1.514 7.826C0 13.457 0 25 0 25s0 11.543 1.514 17.174A8.966 8.966 0 0 0 7.814 48.5C13.38 50 35.706 50 35.706 50s22.326 0 27.892-1.5a8.966 8.966 0 0 0 6.3-6.326C71.412 36.543 71.412 25 71.412 25s0-11.543-1.514-17.174z" fill="#FF0000"/><path d="M28.57 35.714L47.14 25 28.57 14.286z" fill="#fff"/></svg>
+          <span>Watch</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECURITY: Devtools detection overlay -->
+<div id="devtools-overlay">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--red);letter-spacing:0.1em;">⚠ ACCESS DENIED</div>
+  <p>// DEVELOPER TOOLS DETECTED<br>Close DevTools to continue.</p>
+</div>
+<div id="sec-warn">⚠ Warning — Unauthorized inspection detected. This session has been flagged.</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">CORROSIVE<em>.</em>CHEATS</div>
+  <div class="footer-links">
+    <a href="#catalog">Games</a>
+    <a href="#features">Features</a>
+    <a href="https://discord.gg/Q9k7xT48" target="_blank">Discord</a>
+    <a href="#">Terms of Service</a>
+  </div>
+  <p class="copyright">© 2026 CORROSIVE CHEATS — FOR EDUCATIONAL PURPOSES ONLY</p>
+</footer>
+
+<script>
+/* PARTICLES */
+const cvs = document.getElementById('cvs');
+const ctx = cvs.getContext('2d');
+let W, H;
+function resize() { W = cvs.width = window.innerWidth; H = cvs.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.size = Math.random() * 1.2 + 0.2;
+    this.vy = -(Math.random() * 0.35 + 0.08);
+    this.vx = (Math.random() - 0.5) * 0.15;
+    this.alpha = Math.random() * 0.5 + 0.1;
+    this.life = 0;
+    this.maxLife = Math.random() * 280 + 100;
+    this.isRed = Math.random() < 0.12;
+  }
+  update() {
+    this.life++;
+    this.x += this.vx;
+    this.y += this.vy;
+    this.a = this.alpha * Math.sin((this.life / this.maxLife) * Math.PI);
+    if (this.life >= this.maxLife || this.y < -10) this.reset();
+  }
+  draw() {
+    ctx.globalAlpha = this.a;
+    ctx.fillStyle = this.isRed ? '#ff1f1f' : '#ffffff';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+const particles = Array.from({ length: 90 }, () => new Particle());
+function loop() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(loop);
+}
+loop();
+
+/* NAV */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* REVEAL */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* SEARCH */
+document.getElementById('gameSearch').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase();
+  let count = 0;
+  document.querySelectorAll('.game-card').forEach(c => {
+    const m = c.dataset.game.includes(q);
+    c.classList.toggle('visible', m);
+    if (m) count++;
+  });
+  document.getElementById('noResults').classList.toggle('visible', count === 0 && q.length > 0);
+});
+
+/* SELECT GAME */
+function selectGame(name) {
+  document.getElementById('game').value = name;
+  document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ============================================================
+   SECURITY LAYER 1 — IFRAME / CLICKJACKING BUST
+   ============================================================ */
+(function() {
+  if (window.self !== window.top) {
+    window.top.location.href = window.self.location.href;
+  }
+})();
+
+/* ============================================================
+   SECURITY LAYER 2 — DEVTOOLS DETECTION
+   Multiple vectors: size diff, toString override, debugger timing
+   ============================================================ */
+(function() {
+  const THRESHOLD = 160;
+  let _dtOpen = false;
+  const overlay = document.getElementById('devtools-overlay');
+  const warn = document.getElementById('sec-warn');
+
+  function checkDevtools() {
+    // Skip devtools detection on mobile — browser chrome causes false positives
+    if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || ('ontouchstart' in window)) return;
+    const widthDiff = window.outerWidth - window.innerWidth > THRESHOLD;
+    const heightDiff = window.outerHeight - window.innerHeight > THRESHOLD;
+    if (widthDiff || heightDiff) {
+      if (!_dtOpen) {
+        _dtOpen = true;
+        overlay.classList.add('active');
+        warn.style.display = 'block';
+        document.body.style.pointerEvents = 'none';
+        console.clear();
+        console.log('%c⛔ UNAUTHORIZED ACCESS DETECTED', 'color:red;font-size:24px;font-weight:bold;');
+        console.log('%cThis page is protected. Close DevTools.', 'color:#ff4444;font-size:14px;');
+      }
+    } else {
+      if (_dtOpen) {
+        _dtOpen = false;
+        overlay.classList.remove('active');
+        warn.style.display = 'none';
+        document.body.style.pointerEvents = '';
+      }
+    }
+  }
+
+  // Timing-based detection (debugger slows down execution)
+  function debuggerTrap() {
+    const before = performance.now();
+    (function() {})['constructor']('debugger')();
+    const after = performance.now();
+    if (after - before > 100) {
+      overlay.classList.add('active');
+      warn.style.display = 'block';
+    }
+  }
+
+  setInterval(checkDevtools, 800);
+  setInterval(debuggerTrap, 3000);
+  window.addEventListener('resize', checkDevtools);
+})();
+
+/* ============================================================
+   SECURITY LAYER 3 — RIGHT-CLICK & KEYBOARD SHORTCUT BLOCKING
+   ============================================================ */
+(function() {
+  // Block right-click context menu
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // Block common dev/inspection shortcuts
+  document.addEventListener('keydown', function(e) {
+    // F12
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    // Ctrl+Shift+I / Cmd+Opt+I (DevTools)
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); return false; }
+    // Ctrl+Shift+J (Console)
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'J' || e.key === 'j')) { e.preventDefault(); return false; }
+    // Ctrl+Shift+C (Inspector)
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'C' || e.key === 'c')) { e.preventDefault(); return false; }
+    // Ctrl+U (View Source)
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); return false; }
+    // Ctrl+S (Save page)
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's')) { e.preventDefault(); return false; }
+    // Ctrl+A (Select all)
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'A' || e.key === 'a')) { e.preventDefault(); return false; }
+  });
+
+  // Block drag-and-drop of page elements
+  document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
+})();
+
+/* ============================================================
+   SECURITY LAYER 4 — BOT / SCRAPER DETECTION
+   Checks for headless browser signals
+   ============================================================ */
+(function() {
+  const signals = [];
+
+  // Headless Chrome / Puppeteer
+  if (navigator.webdriver) signals.push('webdriver');
+  if (window._phantom || window.callPhantom) signals.push('phantomjs');
+  if (window.__nightmare) signals.push('nightmare');
+  if (!window.chrome && navigator.userAgent.includes('Chrome') && !(/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent))) signals.push('no-chrome-object');
+
+  // Missing plugins (headless browsers often have none)
+  // Exclude mobile devices — they legitimately have no plugins
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || ('ontouchstart' in window);
+  if (navigator.plugins.length === 0 && !navigator.userAgent.includes('Firefox') && !isMobile) {
+    signals.push('no-plugins');
+  }
+
+  // No touch events on "mobile" UA — only flag if truly mismatched (not a real mobile)
+  if (/Mobi/i.test(navigator.userAgent) && !('ontouchstart' in window) && !isMobile) {
+    signals.push('fake-mobile-ua');
+  }
+
+  if (signals.length >= 2) {
+    // Silently redirect bots to a dead end
+    document.body.innerHTML = '<div style="background:#000;color:#000;min-height:100vh;"></div>';
+    console.clear();
+  }
+})();
+
+/* ============================================================
+   SECURITY LAYER 5 — CONSOLE POISON / TRAP
+   Overwrites console so inspectors see warnings
+   ============================================================ */
+(function() {
+  const _warn = '%c⛔ CORROSIVE CHEATS — This console is monitored. Unauthorized automation will be reported.';
+  const _style = 'color:#ff1f1f;font-size:15px;font-weight:bold;background:#000;padding:6px 10px;';
+  const _orig = { log: console.log, warn: console.warn };
+
+  // Show trap message whenever console is opened (the log runs on open)
+  console.log(_warn, _style);
+  console.log('%cSession ID: ' + btoa(Date.now() + navigator.userAgent).slice(0, 24), 'color:#555;font-size:10px;');
+
+  // Override to append warning on every log call from outside
+  const _noop = function() {
+    _orig.log.apply(console, arguments);
+  };
+  window.onerror = function() { return true; }; // Suppress external error leaks
+})();
+
+/* ============================================================
+   SECURITY LAYER 6 — FORM RATE LIMITING + HONEYPOT CHECK
+   Prevents spam and bot submissions
+   ============================================================ */
+const _formState = { lastSubmit: 0, count: 0, locked: false };
+
+async function submitInquiry() {
+  const discord = document.getElementById('discord').value.trim();
+  const game = document.getElementById('game').value;
+  const message = document.getElementById('message').value.trim();
+  const hp = document.getElementById('hp_name').value; // honeypot
+  const status = document.getElementById('formStatus');
+  status.style.display = 'block';
+
+  // SECURITY: Honeypot check — if filled, it's a bot
+  if (hp && hp.length > 0) {
+    status.style.color = 'var(--green)';
+    status.innerText = '// SUCCESS — We\'ll reach out on Discord shortly.';
+    return; // Silently fake success to fool bots
+  }
+
+  // SECURITY: Rate limiting — max 3 submissions per 5 minutes
+  const now = Date.now();
+  if (_formState.locked) {
+    status.style.color = '#ff4444';
+    status.innerText = '// RATE LIMIT — Too many submissions. Wait 5 minutes.';
+    return;
+  }
+  if (now - _formState.lastSubmit < 8000) {
+    status.style.color = '#ff4444';
+    status.innerText = '// SLOW DOWN — Please wait before resubmitting.';
+    return;
+  }
+  _formState.count++;
+  _formState.lastSubmit = now;
+  if (_formState.count >= 3) {
+    _formState.locked = true;
+    setTimeout(() => { _formState.locked = false; _formState.count = 0; }, 300000);
+  }
+
+  // SECURITY: Input sanitization
+  const sanitize = str => str.replace(/[<>'"&;]/g, '').slice(0, 300);
+  const cleanDiscord = sanitize(discord);
+  const cleanMessage = sanitize(message);
+
+  if (!cleanDiscord || !game) {
+    status.style.color = '#ff4444';
+    status.innerText = '// ERROR — Fill in Discord username and select a game.';
+    return;
+  }
+
+  status.style.color = 'var(--red)';
+  status.innerText = '// SENDING...';
+
+  // ── Replace this URL with your Railway deployment URL ──
+  const BACKEND_URL = 'https://corrosive-ticket-bot-production.up.railway.app/create-ticket';
+
+  try {
+    const res = await fetch(BACKEND_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ discord: cleanDiscord, game, message: cleanMessage })
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
+      status.style.color = 'var(--green)';
+      status.innerText = '// TICKET CREATED — Check your Discord DMs shortly.';
+      document.getElementById('discord').value = '';
+      document.getElementById('game').value = '';
+      document.getElementById('message').value = '';
+    } else {
+      status.style.color = '#ff4444';
+      status.innerText = '// ERROR — ' + (data.error || 'Submission failed. Join Discord directly.');
+    }
+  } catch (err) {
+    status.style.color = '#ff4444';
+    status.innerText = '// ERROR — Network issue. Join Discord directly.';
+  }
+}
+
+/* ============================================================
+   SECURITY LAYER 7 — SESSION INTEGRITY CHECK
+   Flags unusual session patterns
+   ============================================================ */
+(function() {
+  const _sessionStart = Date.now();
+  const _uid = Math.random().toString(36).slice(2);
+
+  // Detect if page was loaded inside an automation tool via timing
+  window.addEventListener('load', function() {
+    const loadTime = Date.now() - _sessionStart;
+    const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || ('ontouchstart' in window);
+    if (loadTime < 10 && !isMobileDevice) {
+      // Suspiciously fast — likely automated. Redirect to blank.
+      document.body.innerHTML = '';
+    }
+  });
+
+  // Passive mouse entropy check — bots rarely move mice naturally
+  let _mouseEvents = 0;
+  document.addEventListener('mousemove', function() { _mouseEvents++; }, { passive: true });
+
+  // After 8s, if zero mouse movement and user hasn't scrolled, likely a bot
+  setTimeout(function() {
+    if (_mouseEvents === 0 && window.scrollY === 0 && !('ontouchstart' in window)) {
+      // Silently disable form for suspected bots
+      const btn = document.querySelector('[onclick="submitInquiry()"]');
+      if (btn) btn.onclick = function() {
+        document.getElementById('formStatus').style.display = 'block';
+        document.getElementById('formStatus').style.color = 'var(--green)';
+        document.getElementById('formStatus').innerText = '// SUCCESS — We\'ll reach out on Discord shortly.';
+      };
+    }
+  }, 8000);
+})();
+
+/* GAME MODAL DATA */
+const GAME_DATA = {
+  'Valorant': {
+    genre: 'Tactical FPS',
+    img: 'valorant.png',
+    features: ['Color Triggerbot'],
+    selectVal: 'Valorant',
+    youtube: 'https://www.youtube.com/watch?v=4E4wbp2jUCA'
+  },
+  'Dota2': {
+    genre: 'MOBA',
+    img: 'dota2.png',
+    features: ['Particle ESP', 'Drone'],
+    selectVal: 'Dota2',
+    youtube: 'https://www.youtube.com/watch?v=ks7PbRSmsSk'
+  },
+  'Bloodstrike': {
+    genre: 'Battle Royale',
+    img: 'bloodstrike.png',
+    features: ['Aimbot', 'ESP', 'Silent Aim'],
+    selectVal: 'Bloodstrike',
+    youtube: 'https://youtu.be/aE9VdOrXBMM'
+  },
+  'CS2': {
+    genre: 'Tactical FPS',
+    img: 'cs2.png',
+    features: ['Aimbot', 'ESP', 'Silent Aim', 'No Flash', 'No Smoke'],
+    selectVal: 'CS2',
+    youtube: 'https://www.youtube.com/watch?v=KZfykrh-udY'
+  },
+  'Special Force': {
+    genre: 'FPS',
+    img: 'Special-Force.png',
+    features: ['ESP / Chams', 'Speedhack', 'No Recoil', 'No Flash', 'No Smoke', 'Crosshair'],
+    selectVal: 'Special Force',
+    youtube: 'https://youtu.be/5I2YnW6AkBc'
+  },
+  'Roblox': {
+    genre: 'Platform',
+    img: 'roblox.png',
+    features: ['Aimbot', 'ESP'],
+    selectVal: 'Roblox',
+    youtube: 'https://www.youtube.com/watch?v=kqUzT5wya9U'
+  },
+  'Ran Online': {
+    genre: 'MMORPG',
+    img: 'ran.png',
+    features: ['Long Range', 'AOE', 'Attack Speed', 'Fast Pet Loot', 'Drone', 'Fast Board', 'Fast Teleport', 'Cut Skill'],
+    selectVal: 'Ran Online',
+    youtube: 'https://www.youtube.com/watch?v=TmFfBs5iz0M'
+  }
+};
+
+let _modalSelectVal = '';
+
+function openModal(name) {
+  const data = GAME_DATA[name];
+  if (!data) return;
+  _modalSelectVal = data.selectVal;
+  document.getElementById('modalImg').src = data.img;
+  document.getElementById('modalImg').alt = name;
+  document.getElementById('modalGenre').textContent = data.genre;
+  document.getElementById('modalTitle').textContent = name;
+  const featWrap = document.getElementById('modalFeatures');
+  featWrap.innerHTML = data.features.map(f => `<span class="modal-feat-tag">${f}</span>`).join('');
+  const ytBtn = document.getElementById('modalYoutubeBtn');
+  if (data.youtube) {
+    ytBtn.href = data.youtube;
+    ytBtn.style.display = 'inline-flex';
+  } else {
+    ytBtn.style.display = 'none';
+  }
+  document.getElementById('gameModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGameModal() {
+  document.getElementById('gameModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('gameModal')) closeGameModal();
+}
+
+function orderFromModal() {
+  closeGameModal();
+  selectGame(_modalSelectVal);
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGameModal(); });
+
+/* STAGGERED CARD ANIMATION */
+document.querySelectorAll('.game-card.visible').forEach((c, i) => {
+  c.style.animationDelay = `${i * 0.07}s`;
+});
+</script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69d9b4cb66239b1c36ac8880/1jlt6kf84';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
