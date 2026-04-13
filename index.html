@@ -879,7 +879,7 @@ async function submitInquiry() {
     const data = await res.json();
     if (res.ok && data.success) {
       status.style.color = 'var(--green)';
-      status.innerText = '// TICKET CREATED — Check your Discord DMs shortly.';
+      status.innerHTML = '// TICKET CREATED — <a href="https://discord.gg/Q9k7xT48" target="_blank" style="color:var(--green)">Join our Discord</a> and look for your ticket channel!';
       document.getElementById('discord').value = '';
       document.getElementById('game').value = '';
       document.getElementById('message').value = '';
