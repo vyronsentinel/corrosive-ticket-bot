@@ -33,7 +33,166 @@
   --green: #00FF88;
   --border: rgba(255,255,255,0.06);
   --border-red: rgba(255,31,31,0.3);
+  --nav-bg: rgba(6,6,6,0.92);
+  --ticker-bg: #000;
+  --ticker-fade: #000;
+  --scrollbar-track: #000;
+  --input-bg: #0a0a0a;
+  --input-bg2: #0d0d0d;
+  --modal-overlay-bg: rgba(0,0,0,0.85);
 }
+
+/* ── LIGHT MODE ── */
+html.light {
+  --bg: #f0f2f5;
+  --bg2: #e4e7ec;
+  --bg3: #d8dce4;
+  --text: #0f0f0f;
+  --muted: #aaaaaa;
+  --muted2: #555555;
+  --border: rgba(0,0,0,0.09);
+  --border-red: rgba(180,10,10,0.3);
+  --red: #c80f0f;
+  --red-glow: rgba(200,15,15,0.4);
+  --red-dim: rgba(200,15,15,0.07);
+  --green: #009e50;
+  --nav-bg: rgba(240,242,245,0.95);
+  --ticker-bg: #d8dce4;
+  --ticker-fade: #d8dce4;
+  --scrollbar-track: #ccc;
+  --input-bg: #e2e5ea;
+  --input-bg2: #dddfe5;
+  --modal-overlay-bg: rgba(80,80,80,0.55);
+}
+
+/* Light mode body bg */
+html.light body { background: var(--bg); }
+
+/* Light mode scrollbar */
+html.light ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+
+/* Light mode nav */
+html.light nav { background: var(--nav-bg); }
+
+/* Light mode ticker */
+html.light .ticker-wrap { background: var(--ticker-bg); }
+html.light .ticker-wrap::before { background: linear-gradient(90deg, var(--ticker-fade), transparent); }
+html.light .ticker-wrap::after  { background: linear-gradient(-90deg, var(--ticker-fade), transparent); }
+
+/* Light mode catalog */
+html.light #catalog { background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); }
+
+/* Light mode game cards */
+html.light .game-card { background: var(--bg2); }
+html.light .game-card-img-wrap img { filter: brightness(0.88) grayscale(10%) contrast(1.02); }
+html.light .game-card:hover .game-card-img-wrap img { filter: brightness(1) grayscale(0%) contrast(1.02); }
+
+/* Light mode search */
+html.light .search-input { background: rgba(0,0,0,0.04); color: var(--text); }
+html.light .search-input::placeholder { color: var(--muted); }
+
+/* Light mode features */
+html.light #features { background: var(--bg); }
+html.light .features-grid { background: var(--border); border-color: var(--border); }
+html.light .feature-card { background: var(--bg); }
+html.light .feature-card:hover { background: var(--bg2); }
+
+/* Light mode order */
+html.light #order { background: var(--bg2); }
+html.light .order-inner { background: var(--bg); }
+
+/* Light mode form */
+html.light .form-control { background: var(--input-bg); color: var(--text); border-bottom-color: var(--border); }
+html.light .form-control:focus { background: var(--input-bg2); }
+html.light .form-control::placeholder { color: var(--muted); }
+
+/* Light mode modal */
+html.light .modal-overlay { background: var(--modal-overlay-bg); }
+html.light .modal-box { background: var(--bg); }
+html.light .modal-img img { filter: brightness(0.85) contrast(1.02); }
+html.light .modal-img::after { background: linear-gradient(to bottom, transparent 30%, var(--bg) 100%); }
+html.light .modal-close { background: rgba(240,242,245,0.85); color: var(--muted2); }
+html.light .modal-title { color: var(--text); }
+html.light .modal-divider { background: var(--border); }
+
+/* Light mode btn-secondary */
+html.light .btn-secondary { color: var(--text); border-color: rgba(0,0,0,0.2); }
+html.light .btn-secondary:hover { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.35); }
+
+/* Light mode vignette */
+html.light .vignette { background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.07) 100%); }
+
+/* Light mode scanlines */
+html.light .scanlines { opacity: 0.18; }
+
+/* Light mode hero outline text */
+html.light .hero-title .outline { -webkit-text-stroke: 1px rgba(0,0,0,0.12); }
+
+/* Light mode footer */
+html.light footer { background: var(--bg); border-top-color: var(--border); }
+
+/* Light mode discord gate */
+html.light .discord-user-bar { background: rgba(88,101,242,0.06); }
+
+/* Light mode devtools overlay */
+html.light #devtools-overlay { background: rgba(230,230,230,0.8); }
+
+/* ── THEME TOGGLE SWITCH ── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.theme-toggle input { display: none; }
+
+.theme-toggle-track {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: background 0.3s ease, border-color 0.3s ease;
+  flex-shrink: 0;
+}
+html.light .theme-toggle-track {
+  background: rgba(0,0,0,0.08);
+  border-color: rgba(0,0,0,0.15);
+}
+.theme-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 6px var(--red-glow);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+}
+.theme-toggle input:checked ~ .theme-toggle-track .theme-toggle-knob {
+  transform: translateX(18px);
+}
+.theme-toggle-icon {
+  font-size: 0.62rem;
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  transition: color 0.3s;
+  flex-shrink: 0;
+}
+/* Active label = current mode */
+#themeIconLeft  { color: var(--red); }  /* DARK is active by default */
+html.light #themeIconLeft  { color: var(--muted); }
+html.light #themeIconRight { color: var(--red); }
+.theme-toggle:hover .theme-toggle-icon { color: var(--muted2); }
+.theme-toggle:hover #themeIconLeft  { color: var(--red); }
+html.light .theme-toggle:hover #themeIconLeft  { color: var(--muted2); }
+html.light .theme-toggle:hover #themeIconRight { color: var(--red); }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
@@ -42,7 +201,7 @@ body{
   line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 ::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:#000}
+::-webkit-scrollbar-track{background:var(--scrollbar-track)}
 ::-webkit-scrollbar-thumb{background:var(--red)}
 #cvs{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.35}
 .scanlines{
@@ -64,7 +223,7 @@ nav{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   height:68px;display:flex;align-items:center;justify-content:space-between;
   padding:0 3rem;
-  background:rgba(6,6,6,0.92);backdrop-filter:blur(20px);
+  background:var(--nav-bg);backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);transition:all 0.3s ease;
 }
 nav.scrolled{height:54px;border-bottom-color:var(--border-red);box-shadow:0 1px 40px rgba(255,31,31,0.06)}
@@ -77,7 +236,7 @@ nav.scrolled{height:54px;border-bottom-color:var(--border-red);box-shadow:0 1px 
   content:'';position:absolute;left:-12px;top:50%;transform:translateY(-50%);
   width:3px;height:60%;background:var(--red);box-shadow:0 0 10px var(--red);
 }
-.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
 .nav-links a{
   text-decoration:none;color:var(--muted2);font-size:0.78rem;font-weight:600;
   text-transform:uppercase;letter-spacing:0.15em;transition:color 0.2s;position:relative;
@@ -88,6 +247,10 @@ nav.scrolled{height:54px;border-bottom-color:var(--border-red);box-shadow:0 1px 
 }
 .nav-links a:hover{color:var(--text)}
 .nav-links a:hover::before{opacity:1}
+/* Separator between toggle and login */
+.nav-toggle-sep{
+  width:1px;height:18px;background:var(--border);flex-shrink:0;
+}
 .nav-btn{
   font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;
   text-transform:uppercase;color:var(--red)!important;border:1px solid var(--red);
@@ -200,13 +363,13 @@ nav.scrolled{height:54px;border-bottom-color:var(--border-red);box-shadow:0 1px 
 
 /* TICKER */
 .ticker-wrap{
-  position:relative;z-index:2;background:#000;
+  position:relative;z-index:2;background:var(--ticker-bg);
   border-top:1px solid var(--border-red);border-bottom:1px solid var(--border-red);
   padding:12px 0;overflow:hidden;
 }
 .ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;width:120px;height:100%;z-index:2}
-.ticker-wrap::before{left:0;background:linear-gradient(90deg,#000,transparent)}
-.ticker-wrap::after{right:0;background:linear-gradient(-90deg,#000,transparent)}
+.ticker-wrap::before{left:0;background:linear-gradient(90deg,var(--ticker-bg),transparent)}
+.ticker-wrap::after{right:0;background:linear-gradient(-90deg,var(--ticker-bg),transparent)}
 .ticker-track{display:inline-flex;animation:tick 22s linear infinite;white-space:nowrap}
 .ticker-item{
   display:inline-flex;align-items:center;gap:10px;
@@ -338,12 +501,12 @@ nav.scrolled{height:54px;border-bottom-color:var(--border-red);box-shadow:0 1px 
 .form-group{margin-bottom:1.2rem}
 .form-group label{display:block;font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px}
 .form-control{
-  width:100%;background:#0a0a0a;border:none;
+  width:100%;background:var(--input-bg);border:none;
   border-bottom:1px solid var(--border);border-left:2px solid transparent;
   padding:11px 14px;color:var(--text);font-family:'Rajdhani',sans-serif;
   font-size:0.95rem;font-weight:500;transition:all 0.25s;outline:none;
 }
-.form-control:focus{border-bottom-color:var(--red);border-left-color:var(--red);background:#0d0d0d}
+.form-control:focus{border-bottom-color:var(--red);border-left-color:var(--red);background:var(--input-bg2)}
 .form-control::placeholder{color:var(--muted)}
 select.form-control option{background:#111;color:var(--text)}
 textarea.form-control{resize:vertical;min-height:90px}
@@ -518,6 +681,17 @@ footer{position:relative;z-index:2;padding:60px 4rem;border-top:1px solid var(--
     <li><a href="#catalog">Games</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#order">Purchase</a></li>
+    <li>
+      <label class="theme-toggle" title="Toggle light/dark mode">
+        <input type="checkbox" id="themeToggle" autocomplete="off">
+        <span class="theme-toggle-icon" id="themeIconLeft">DARK</span>
+        <span class="theme-toggle-track">
+          <span class="theme-toggle-knob"></span>
+        </span>
+        <span class="theme-toggle-icon" id="themeIconRight">LIGHT</span>
+      </label>
+    </li>
+    <li><span class="nav-toggle-sep"></span></li>
     <li><a href="https://corrosive-ticket-bot-production.up.railway.app/auth/login" class="nav-btn">Login</a></li>
   </ul>
 </nav>
@@ -1311,6 +1485,34 @@ function logoutDiscord() {
 }
 
 initDiscordAuth();
+
+/* ============================================================
+   THEME TOGGLE — LIGHT / DARK
+   ============================================================ */
+(function() {
+  const html = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('corrosive_theme');
+
+  function applyTheme(light) {
+    if (light) {
+      html.classList.add('light');
+      toggle.checked = true;
+    } else {
+      html.classList.remove('light');
+      toggle.checked = false;
+    }
+  }
+
+  // Restore saved preference
+  applyTheme(saved === 'light');
+
+  toggle.addEventListener('change', function() {
+    const isLight = this.checked;
+    applyTheme(isLight);
+    localStorage.setItem('corrosive_theme', isLight ? 'light' : 'dark');
+  });
+})();
 
 /* STAGGERED CARD ANIMATION */
 document.querySelectorAll('.game-card.visible').forEach((c, i) => {
