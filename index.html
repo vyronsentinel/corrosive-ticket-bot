@@ -460,26 +460,29 @@ footer{position:relative;z-index:2;padding:60px 4rem;border-top:1px solid var(--
 }
 
 /* DISCORD AUTH */
-.discord-auth-wrap{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.discord-login-wrap{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:2.5rem;text-align:center;gap:1.2rem;
+}
 .discord-login-btn{
-  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
-  background:#5865F2;color:#fff;border:none;padding:12px 20px;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:#5865F2;color:#fff;border:none;padding:14px 28px;cursor:pointer;
   font-family:'Share Tech Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;
   text-transform:uppercase;transition:all 0.25s;text-decoration:none;
   clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
 }
-.discord-login-btn:hover{background:#4752c4;transform:translateY(-2px)}
-.discord-login-btn svg{flex-shrink:0}
-.discord-user-info{
+.discord-login-btn:hover{background:#4752c4;transform:translateY(-2px);box-shadow:0 0 20px rgba(88,101,242,0.4)}
+.discord-login-desc{font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
+.discord-user-bar{
   display:flex;align-items:center;gap:12px;
   background:rgba(88,101,242,0.08);border:1px solid rgba(88,101,242,0.25);
-  padding:10px 14px;
+  padding:10px 14px;margin-bottom:1.5rem;
 }
 .discord-avatar{width:36px;height:36px;border-radius:50%;border:2px solid #5865F2}
 .discord-avatar-placeholder{
-  width:36px;height:36px;border-radius:50%;background:#5865F2;
+  width:36px;height:36px;border-radius:50%;background:#5865F2;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#fff;flex-shrink:0;
+  font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#fff;
 }
 .discord-user-name{font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:var(--text);letter-spacing:0.08em}
 .discord-user-status{font-size:0.6rem;color:#5865F2;letter-spacing:0.1em;text-transform:uppercase}
@@ -489,10 +492,6 @@ footer{position:relative;z-index:2;padding:60px 4rem;border-top:1px solid var(--
   letter-spacing:0.08em;text-transform:uppercase;transition:all 0.2s;
 }
 .discord-logout:hover{border-color:var(--red);color:var(--red)}
-.auth-required-msg{
-  font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--muted);
-  text-align:center;letter-spacing:0.08em;margin-top:0.5rem;
-}
 
 </style>
 </head>
@@ -713,49 +712,49 @@ footer{position:relative;z-index:2;padding:60px 4rem;border-top:1px solid var(--
       <a href="https://discord.gg/Q9k7xT48" target="_blank" class="btn btn-primary" style="margin-top:2.5rem">Join Discord Server</a>
     </div>
     <div class="order-form-wrap">
-      <div class="discord-auth-wrap">
-        <div id="discordLoginSection">
-          <a href="https://corrosive-ticket-bot-production.up.railway.app/auth/login" class="discord-login-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 71 55" fill="none"><path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/></svg>
-            Login with Discord
-          </a>
-          <p class="auth-required-msg">// Login to submit a ticket & get instant access</p>
-        </div>
-        <div id="discordUserSection" style="display:none">
-          <div class="discord-user-info">
-            <div class="discord-avatar-placeholder" id="discordAvatarPlaceholder"></div>
-            <img id="discordAvatarImg" class="discord-avatar" style="display:none" src="" alt="">
-            <div>
-              <div class="discord-user-name" id="discordUserName"></div>
-              <div class="discord-user-status">✓ Connected</div>
-            </div>
-            <button class="discord-logout" onclick="logoutDiscord()">Logout</button>
+      <!-- LOGIN GATE -->
+      <div id="discordLoginGate" class="discord-login-wrap">
+        <a href="https://corrosive-ticket-bot-production.up.railway.app/auth/login" class="discord-login-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 71 55" fill="none"><path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/></svg>
+          Login with Discord
+        </a>
+        <p class="discord-login-desc">// Login required to submit a ticket</p>
+      </div>
+
+      <!-- FORM (shown after login) -->
+      <div id="discordFormSection" style="display:none">
+        <div class="form-title">Quick Inquiry</div>
+        <div class="discord-user-bar">
+          <div class="discord-avatar-placeholder" id="discordAvatarPlaceholder"></div>
+          <img id="discordAvatarImg" class="discord-avatar" style="display:none" src="" alt="">
+          <div>
+            <div class="discord-user-name" id="discordUserName"></div>
+            <div class="discord-user-status">✓ Connected</div>
           </div>
+          <button class="discord-logout" onclick="logoutDiscord()">Logout</button>
         </div>
+        <div class="form-group">
+          <label>Discord Username</label>
+          <input type="text" id="discord" class="form-control" placeholder="user#0000">
+        </div>
+        <div class="form-group">
+          <label>Select Game</label>
+          <select id="game" class="form-control">
+            <option value="">Choose a game...</option>
+            <option>Valorant</option><option>Dota2</option><option>Bloodstrike</option>
+            <option>CS2</option><option>Special Force</option><option>Roblox</option>
+            <option>Ran Online</option><option>Other / Not Listed</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="message" class="form-control" placeholder="Any questions or special requests..."></textarea>
+        </div>
+        <div class="hp-field" aria-hidden="true"><input type="text" id="hp_name" name="hp_name" tabindex="-1" autocomplete="off" placeholder="Leave empty"></div>
+        <button onclick="submitInquiry()" class="btn btn-primary" style="width:100%;margin-top:1rem;justify-content:center;font-size:0.78rem;letter-spacing:0.15em;padding:14px">Send Inquiry</button>
+        <div id="formStatus"></div>
+        <p style="font-size:0.7rem;color:var(--muted);margin-top:1rem;text-align:center;font-family:'Share Tech Mono',monospace;letter-spacing:0.06em">Response within minutes on Discord.</p>
       </div>
-      <div class="form-title">Quick Inquiry</div>
-      <div class="form-group">
-        <label>Discord Username</label>
-        <input type="text" id="discord" class="form-control" placeholder="user#0000">
-      </div>
-      <div class="form-group">
-        <label>Select Game</label>
-        <select id="game" class="form-control">
-          <option value="">Choose a game...</option>
-          <option>Valorant</option><option>Dota2</option><option>Bloodstrike</option>
-          <option>CS2</option><option>Special Force</option><option>Roblox</option>
-          <option>Ran Online</option><option>Other / Not Listed</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Message</label>
-        <textarea id="message" class="form-control" placeholder="Any questions or special requests..."></textarea>
-      </div>
-      <!-- SECURITY: Honeypot — bots fill this, humans don't see it -->
-      <div class="hp-field" aria-hidden="true"><input type="text" id="hp_name" name="hp_name" tabindex="-1" autocomplete="off" placeholder="Leave empty"></div>
-      <button onclick="submitInquiry()" class="btn btn-primary" style="width:100%;margin-top:1rem;justify-content:center;font-size:0.78rem;letter-spacing:0.15em;padding:14px">Send Inquiry</button>
-      <div id="formStatus"></div>
-      <p style="font-size:0.7rem;color:var(--muted);margin-top:1rem;text-align:center;font-family:'Share Tech Mono',monospace;letter-spacing:0.06em">Response within minutes on Discord.</p>
     </div>
   </div>
 </section>
@@ -1075,18 +1074,17 @@ async function submitInquiry() {
     return;
   }
 
-  // Check if logged in
-  const sessionToken = localStorage.getItem('discord_session');
-
   status.style.color = 'var(--red)';
   status.innerText = '// SENDING...';
 
+  // ── Replace this URL with your Railway deployment URL ──
   const BACKEND_URL = 'https://corrosive-ticket-bot-production.up.railway.app/create-ticket';
 
   try {
     const res = await fetch(BACKEND_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      const sessionToken = localStorage.getItem('discord_session');
       body: JSON.stringify({ discord: cleanDiscord, game, message: cleanMessage, sessionToken })
     });
     const data = await res.json();
@@ -1239,7 +1237,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGameMod
    DISCORD OAUTH2 AUTH
    ============================================================ */
 function initDiscordAuth() {
-  // Check URL params for session token after OAuth redirect
   const params = new URLSearchParams(window.location.search);
   const session = params.get('session');
   const username = params.get('username');
@@ -1251,11 +1248,6 @@ function initDiscordAuth() {
     localStorage.setItem('discord_username', username);
     localStorage.setItem('discord_avatar', avatar || '');
     localStorage.setItem('discord_id', userId || '');
-    // Clean URL
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
-
-  if (params.get('auth') === 'error') {
     window.history.replaceState({}, document.title, window.location.pathname);
   }
 
@@ -1268,16 +1260,15 @@ function updateAuthUI() {
   const avatar = localStorage.getItem('discord_avatar');
   const userId = localStorage.getItem('discord_id');
 
-  const loginSection = document.getElementById('discordLoginSection');
-  const userSection = document.getElementById('discordUserSection');
+  const loginGate = document.getElementById('discordLoginGate');
+  const formSection = document.getElementById('discordFormSection');
   const discordInput = document.getElementById('discord');
 
   if (session && username) {
-    loginSection.style.display = 'none';
-    userSection.style.display = 'block';
+    loginGate.style.display = 'none';
+    formSection.style.display = 'block';
     document.getElementById('discordUserName').textContent = username;
 
-    // Set avatar
     if (avatar && userId) {
       const avatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png?size=64`;
       const img = document.getElementById('discordAvatarImg');
@@ -1288,11 +1279,10 @@ function updateAuthUI() {
       document.getElementById('discordAvatarPlaceholder').textContent = username.charAt(0).toUpperCase();
     }
 
-    // Auto-fill discord username
     if (discordInput) discordInput.value = username;
   } else {
-    loginSection.style.display = 'block';
-    userSection.style.display = 'none';
+    loginGate.style.display = 'flex';
+    formSection.style.display = 'none';
   }
 }
 
@@ -1302,11 +1292,8 @@ function logoutDiscord() {
   localStorage.removeItem('discord_avatar');
   localStorage.removeItem('discord_id');
   updateAuthUI();
-  const discordInput = document.getElementById('discord');
-  if (discordInput) discordInput.value = '';
 }
 
-// Initialize on load
 initDiscordAuth();
 
 /* STAGGERED CARD ANIMATION */
